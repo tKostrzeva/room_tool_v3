@@ -186,8 +186,8 @@ function draw() {
 
   background(0);
 
-  TILES_X = 10;
-  TILES_Y = 20;
+  TILES_X = 100;
+  TILES_Y = 200;
 
   let tileW = width / TILES_X;
   let tileH = height / TILES_Y;
