@@ -3,13 +3,19 @@ let atlas; // pGraphics - texture atlas
 let room;  // pGraphics WEBGL
 let saveBtn;
 let img;
+let sample;
 
-function preload(){
+let TILES_X, TILES_Y;
+
+function preload() {
   img = loadImage("photo.png");
 }
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+
+  sample = createGraphics(TILES_X, TILES_Y);
+  sample.pixelDensity(1);
 
   // Start camera immediately (no default image)
   cam = createCapture({
@@ -180,23 +186,31 @@ function draw() {
 
   background(0);
 
-  let TILES_X = 50;
-  let TILES_Y = 100;
+  TILES_X = 10;
+  TILES_Y = 20;
 
   let tileW = width / TILES_X;
   let tileH = height / TILES_Y;
 
-  room.resize(TILES_X, TILES_Y);
+  // downsample room into tiny 2D buffer
+  sample.resizeCanvas(TILES_X, TILES_Y);
+  sample.image(room, 0, 0, TILES_X, TILES_Y);
 
   push();
+  fill(255);
   translate(tileW / 2, tileH / 2);
-  for (let x = 0; x < TILES_X; x++) {
-    for (let y = 0; y < TILES_Y; y++) {
-      let c = room.get(x, y);
-      let b = brightness(c);
-      let s = map(b, 0, 100, 1, 0);
+  for (let y = 0; y < TILES_Y; y++) {
+    for (let x = 0; x < TILES_X; x++) {
 
-      fill(255);
+      const i = 4 * (x + y * TILES_X);
+
+      const lum = (
+        sample.pixels[i] +
+        sample.pixels[i + 1] +
+        sample.pixels[i + 2]
+      ) / 3;
+
+      const s = map(lum, 0, 255, 1, 0);
 
       ellipse(x * tileW, y * tileH, tileW * s, tileH * s);
     }
@@ -206,5 +220,5 @@ function draw() {
 
 
 
-  /* image(room, 0, 0, width, height); */
+  /*  image(room, 0, 0, width, height); */
 }
