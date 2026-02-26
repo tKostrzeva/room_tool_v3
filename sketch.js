@@ -199,7 +199,8 @@ function draw() {
 
   push();
   noStroke();
-  translate(tileW / 2, tileH / 2);
+  rectMode(CORNER);
+  /* translate(tileW / 2, tileH / 2); */
   for (let y = 0; y < TILES_Y; y++) {
     for (let x = 0; x < TILES_X; x++) {
 
