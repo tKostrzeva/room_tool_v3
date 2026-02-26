@@ -186,8 +186,8 @@ function draw() {
 
   background(230);
 
-  TILES_X = 100;
-  TILES_Y = 200;
+  TILES_X = 64;
+  TILES_Y = 128;
 
   let tileW = width / TILES_X;
   let tileH = height / TILES_Y;
@@ -198,7 +198,7 @@ function draw() {
   sample.loadPixels();
 
   push();
-  fill(0);
+
   translate(tileW / 2, tileH / 2);
   for (let y = 0; y < TILES_Y; y++) {
     for (let x = 0; x < TILES_X; x++) {
@@ -206,7 +206,10 @@ function draw() {
       const i = 4 * (x + y * TILES_X);
       const s = map(sample.pixels[i], 0, 255, 1, 0);
 
-      ellipse(x * tileW, y * tileH, tileW * s, tileH * s);
+      let c = color(sample.pixels[i]);
+
+      fill(c);
+      rect(x * tileW, y * tileH, tileW, tileH);
     }
   }
   pop();
