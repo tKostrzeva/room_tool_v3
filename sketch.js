@@ -195,6 +195,7 @@ function draw() {
   // downsample room into tiny 2D buffer
   sample.resizeCanvas(TILES_X, TILES_Y);
   sample.image(room, 0, 0, TILES_X, TILES_Y);
+  sample.loadPixels();
 
   push();
   fill(255);
