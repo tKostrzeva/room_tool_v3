@@ -190,7 +190,7 @@ function draw() {
   TILES_Y = 128;
 
   let tileW = windowWidth / TILES_X;
-  let tileH = windowWidth / TILES_Y;
+  let tileH = windowHeight / TILES_Y;
 
   // downsample room into tiny 2D buffer
   sample.resizeCanvas(TILES_X, TILES_Y);
