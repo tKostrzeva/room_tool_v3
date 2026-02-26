@@ -184,7 +184,7 @@ function draw() {
 
   room.pop();
 
-  background(0);
+  background(230);
 
   TILES_X = 100;
   TILES_Y = 200;
