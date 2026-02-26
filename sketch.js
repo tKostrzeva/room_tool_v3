@@ -203,14 +203,7 @@ function draw() {
     for (let x = 0; x < TILES_X; x++) {
 
       const i = 4 * (x + y * TILES_X);
-
-      const lum = (
-        sample.pixels[i] +
-        sample.pixels[i + 1] +
-        sample.pixels[i + 2]
-      ) / 3;
-
-      const s = map(lum, 0, 255, 1, 0);
+      const s = map(sample.pixels[i], 0, 255, 1, 0);
 
       ellipse(x * tileW, y * tileH, tileW * s, tileH * s);
     }
