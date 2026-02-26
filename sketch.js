@@ -103,7 +103,7 @@ function draw() {
 
   // Render room
   room.clear();
-  room.background(0);
+  room.background(230);
 
   const w = room.width;
   const h = room.height;
@@ -198,7 +198,7 @@ function draw() {
   sample.loadPixels();
 
   push();
-  fill(255);
+  fill(0);
   translate(tileW / 2, tileH / 2);
   for (let y = 0; y < TILES_Y; y++) {
     for (let x = 0; x < TILES_X; x++) {
