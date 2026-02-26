@@ -189,8 +189,8 @@ function draw() {
   TILES_X = 64;
   TILES_Y = 128;
 
-  let tileW = width / TILES_X;
-  let tileH = height / TILES_Y;
+  let tileW = windowWidth / TILES_X;
+  let tileH = windowWidth / TILES_Y;
 
   // downsample room into tiny 2D buffer
   sample.resizeCanvas(TILES_X, TILES_Y);
@@ -198,18 +198,25 @@ function draw() {
   sample.loadPixels();
 
   push();
-
+  noStroke();
   translate(tileW / 2, tileH / 2);
   for (let y = 0; y < TILES_Y; y++) {
     for (let x = 0; x < TILES_X; x++) {
 
       const i = 4 * (x + y * TILES_X);
-      const s = map(sample.pixels[i], 0, 255, 1, 0);
 
-      let c = color(sample.pixels[i]);
+      const r = sample.pixels[i];
+      const g = sample.pixels[i + 1];
+      const b = sample.pixels[i + 2];
 
-      fill(c);
-      rect(x * tileW, y * tileH, tileW, tileH);
+      fill(r, g, b);
+
+      rect(
+        x * tileW,
+        y * tileH,
+        tileW,
+        tileH
+      );
     }
   }
   pop();
